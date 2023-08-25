@@ -1,0 +1,110 @@
+void main() {
+  var count  = 10;
+  int age = 15;
+  
+  bool isHonors = true;
+  double cgpa = 9.0;
+  final String name = "hello";
+  
+  dynamic place = "dharwad";
+  const double maxCGPA = 10 ;  
+  
+  String value = "10";
+  
+  int number = int.parse(value);
+  String v1 = number.toString();
+  double? val1 = double.tryParse("12._");
+    
+  StudentTypes type = StudentTypes.PG; 
+  print(type);
+  //no Array in dart
+  List<double> semesters = [1,2,3,4,5];
+  print(semesters[1]);
+  
+  int? a = 0;
+  //var studentsList = List<Student>();
+  
+    if(cgpa > 8) 
+  {
+    print("Grade: A");
+  }
+  
+  String? studentType;
+  print(studentType ?? "Not Assigned"); 
+  
+  List<int> numbers = [1,3,5];
+  for(var n in numbers) {
+    print(n);
+  }
+  
+  bool checkEven(int val) => val % 2 == 0;
+  print(checkEven(numbers[2]));
+  
+  void test() {}
+  
+  numbers.forEach((n) => print(n + 1));
+  
+  display(b:10);
+  
+  var student = Student(name:"abc");
+  print("${student.name} ${student.cgpa}");
+  var anotherStudent = student.copyWith(name: "xyz");
+  print("${anotherStudent.name} ${anotherStudent.cgpa}");
+  
+  List<Student> studentList = [
+    Student(name: 'Alice', cgpa: 10),
+    Student(name: 'Bob', cgpa: 10),
+  ];
+  
+  print(studentList[1].name);
+  
+  //Map
+  var gifts = Map<String, String>();
+  gifts['first'] = 'partridge';
+  gifts['second'] = 'turtledoves';
+  gifts['fifth'] = 'golden rings';
+  
+  //spread operator a concise way to insert
+  //multiple values into a collection.
+  var list = [1, 2, 3];
+  var list2 = [0, ...list];
+  
+  
+}
+//named
+void display({int? a, int? b}) {
+  print(a ?? b);
+}
+
+//positional
+void display1([int? a, int? b]) {
+  print(a ?? b);
+}
+enum StudentTypes {UG, PG}
+
+class Student {
+  late String name;
+  late double cgpa;
+  late StudentTypes _studentType;
+  
+  /*
+  Student(String name, double cgpa){
+    this.name = name;
+    this.cgpa = cgpa;
+  }*/
+  
+  Student({String name ="NA", double cgpa = 0}){
+    this.name = name;
+    this.cgpa = cgpa;
+  }
+  
+  //Student(this.name, this.cgpa, this._studentType);
+  
+  Student.ug() :
+   _studentType = StudentTypes.UG;
+  
+  Student copyWith({String? name, double? cgpa}) => Student(
+    name: name ?? this.name,
+    cgpa: cgpa ?? this.cgpa
+  );  
+}

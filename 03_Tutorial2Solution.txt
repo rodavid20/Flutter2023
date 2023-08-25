@@ -1,0 +1,38 @@
+class GameObject {
+  double x = 0;
+  double y = 0;
+}
+
+mixin Movable on GameObject {
+  void moveLeft() => x--;
+  void moveRight() => x++;
+  void moveUp() => y--;
+  void moveDown() => y++;
+}
+
+abstract class Drawable {
+  void draw();
+}
+
+class Player extends GameObject with Movable implements Drawable {
+  void jump() {
+    // Implement jump logic here
+  }
+
+  @override
+  void draw() {
+    // Implement drawing logic for player here
+  }
+}
+
+class Enemy extends GameObject with Movable implements Drawable {
+  void attack() {
+    // Implement attack logic here
+  }
+
+  @override
+  void draw() {
+    // Implement drawing logic for enemy here
+  }
+}
+

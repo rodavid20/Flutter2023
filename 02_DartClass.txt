@@ -1,0 +1,71 @@
+class Person {
+  String? name;
+  int? age;
+  
+  Person({this.name, this.age});
+  
+}
+
+class Animal {
+  int? noOfLegs;
+}
+
+mixin CanFly {
+  void fly() {
+   print("flying"); 
+  }
+}
+
+mixin CanEat {
+  void eat() {
+    print("eating");
+  }
+}
+
+class Student extends Person with CanFly, CanEat {
+  double? cgpa;
+  
+  Student(String name, int age, double cgpa): super(name: name,age: age){
+    this.cgpa = cgpa;
+  }
+  
+  double calculate(int a, int b) {
+    double result = 0;
+    try {
+      
+      if(b != 0) {
+        result = a / b;  
+      }      
+    } catch (ex) {
+      print('error');
+    }
+    return result;
+  }
+}
+
+
+void main() {
+  var student = Student("Alice", 30, 9.0);
+  print(student.name);
+  student.fly();
+  
+  var numbers = [1,2,3,4,5];
+  var numbers1 = [20,...numbers];
+  numbers1.forEach((int n)=> print(n));
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
