@@ -19,3 +19,7 @@ flutter:
   uses-material-design: true
   assets:
     - images/iiit_logo.png
+  fonts:
+    - family: Pacifico
+      fonts:
+        - asset: fonts/Pacifico-Regular.ttf
