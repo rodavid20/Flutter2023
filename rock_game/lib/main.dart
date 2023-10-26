@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    MainApp(),
+    const MainApp(),
   );
 }
 
@@ -15,15 +15,17 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  var winningScore = 5;
+  var gameOver = false;
+  var winner = "";
   var leftImage = '';
   var rightImage = '';
   var leftScore = 0;
   var rightScore = 0;
 
-  @protected
-  @mustCallSuper
   @override
   void initState() {
+    super.initState();
     changeImage();
   }
 
@@ -37,54 +39,67 @@ class _MainAppState extends State<MainApp> {
         body: Center(
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-                          Text('Player 1'),
-                          TextButton(
-                            child: Image.asset('images/$leftImage'),
-                            onPressed: () {
-                              setState(() {
-                                changeImage();
-                              });
-                            },
-                          ),
-                          Text('Score: $leftScore'),
-                        ],
+              gameOver
+                  ? Card(
+                      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child: ListTile(
+                        title: const Text(
+                          'GAME OVER',
+                          style: TextStyle(color: Colors.blueGrey),
+                        ),
+                        subtitle: Text('$winner won the game'),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-                          Text('Player 2'),
-                          TextButton(
-                            child: Image.asset('images/$rightImage'),
-                            onPressed: () {
-                              setState(() {
-                                changeImage();
-                              });
-                            },
+                    )
+                  : Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              children: [
+                                const Text('Player 1'),
+                                TextButton(
+                                  child: Image.asset('images/$leftImage'),
+                                  onPressed: () {
+                                    setState(() {
+                                      changeImage();
+                                    });
+                                  },
+                                ),
+                                Text('Score: $leftScore'),
+                              ],
+                            ),
                           ),
-                          Text('Score: $rightScore'),
-                        ],
-                      ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              children: [
+                                const Text('Player 2'),
+                                TextButton(
+                                  child: Image.asset('images/$rightImage'),
+                                  onPressed: () {
+                                    setState(() {
+                                      changeImage();
+                                    });
+                                  },
+                                ),
+                                Text('Score: $rightScore'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
               ElevatedButton(
-                child: Text('Reset Game'),
+                child: const Text('Reset Game'),
                 onPressed: () {
                   setState(() {
                     leftScore = 0;
                     rightScore = 0;
+                    gameOver = false;
+                    winner = '';
                     changeImage();
                   });
                 },
@@ -123,6 +138,14 @@ class _MainAppState extends State<MainApp> {
       leftScore += 1;
     } else {
       rightScore += 1;
+    }
+
+    if (leftScore == winningScore) {
+      gameOver = true;
+      winner = 'Player 1';
+    } else if (rightScore == winningScore) {
+      gameOver = true;
+      winner = 'Player 2';
     }
   }
 }
